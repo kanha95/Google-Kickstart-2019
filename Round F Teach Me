@@ -1,0 +1,80 @@
+
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+  public static void main(String[] args) {
+     	 
+	 Scanner sc = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
+	  
+	  int t = sc.nextInt();
+	  int ttt=0;
+	  while(t-->0){
+	      ttt++;
+	      int n = sc.nextInt();
+	      int s = sc.nextInt();
+	      
+	      ArrayList<ArrayList> al = new ArrayList<>();
+	      
+	      HashMap<String, Integer> hm = new HashMap<>();
+	      
+	      for(int i=0;i<n;i++){
+	          int p = sc.nextInt();
+	          ArrayList<Integer> al2 = new ArrayList<>();
+	          String hs = "#";
+	          
+	          for(int j=0;j<p;j++){
+	             int temp = sc.nextInt();
+	              al2.add(temp);
+	              
+	          }
+	          Collections.sort(al2);
+	          
+	          for(Integer kk: al2) {
+	        	  hs = hs + String.valueOf(kk)+"#";
+	          }
+	          
+	          al.add(al2);
+	          if(!hm.containsKey(hs)) hm.put(hs, 1);
+	          else{
+	              hm.put(hs, hm.get(hs)+1);
+	          }
+	      }
+	      
+	      long ans = 0;
+	      
+	      for(ArrayList<Integer> i:al){
+	    	  
+	          int tans = n;
+	          for(int cc = 1; cc<= (int)Math.pow(2, i.size()) ; cc++){
+	              String hs3 = "#";              
+	              
+	              for(int j = 0; j<i.size();j++){
+	            	 
+	                  if((cc & (1<<j)) > 0){
+	                	
+	                       hs3 = hs3 + String.valueOf(i.get(j)) + "#";        
+	                  }
+	                  
+	              }
+	              
+	              if(hm.containsKey(hs3)){
+	            	  //System.out.println(hs3);
+	                  tans = tans - hm.get(hs3);
+	              }
+	              
+	              
+	          }
+	         // System.out.println(tans);
+	          ans += tans;
+	      }
+	      
+	      
+	      
+	     System.out.println("Case #"+ttt+": "+ans);
+	     
+	  }
+	  
+	 
+}
+}
