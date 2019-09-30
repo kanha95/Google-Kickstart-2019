@@ -2,6 +2,12 @@
 import java.util.*;
 import java.io.*;
 
+/*
+Don't use HashSet ever with hashmaps. It's slow. use Arraylist with sorting or string for best results. You can also construct 
+a hash of your own and use it rather using strings or arraylist.
+*/
+
+
 public class Solution {
   public static void main(String[] args) {
      	 
