@@ -1,0 +1,90 @@
+
+import java.util.*;
+import java.io.*;
+
+/*
+Don't use HashSet ever with hashmaps. It's slow. use Arraylist with sorting or string for best results. You can also construct 
+a hash of your own and use it rather using strings or arraylist.
+
+You can use sieve method to further improve its complexity. Still this code passed all test cases.
+*/
+
+
+public class Solution {
+	
+	  static ArrayList findDivisors(int n) 
+	    { 
+	        // Note that this loop runs till square root
+		  ArrayList<Integer> al = new ArrayList<>();
+	        for (int i=1; i<=Math.sqrt(n); i++) 
+	        { 
+	            if (n%i==0) 
+	            { 
+	                // If divisors are equal, print only one 
+	                if (n/i == i) 
+	                    al.add(i); 
+	       
+	                else { 
+	                    al.add(i);
+	                    al.add(n/i);
+	                }
+	            } 
+	        }
+	        
+	        return al;
+	    } 
+	  
+  public static void main(String[] args) {
+     	 
+	 Scanner sc = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
+	  
+	  int t = sc.nextInt();
+	  int ttt=0;
+	  while(t-->0){
+	  ttt++;
+	  
+	 int n = sc.nextInt();
+	 int m = sc.nextInt();
+	 int q = sc.nextInt();
+	 
+	 int[] torn = new int[m];
+	 int[] reader = new int[q];
+	 
+	 for(int i=0;i<m;i++){
+	 torn[i] = sc.nextInt();
+	 }
+	 HashMap<Integer, Integer> hm = new HashMap<>();
+	 for(int i=0;i<q;i++){
+	 reader[i] = sc.nextInt();
+	 if(hm.containsKey(reader[i]) ) {
+		 hm.put(reader[i], hm.get(reader[i])+1);
+	 }
+	 else {
+		 hm.put(reader[i], 1);
+	 }
+	 }
+	  
+	 long ans = 0;
+	 
+	 for(int i=0;i<q;i++){
+	     ans += n/reader[i];
+	 }
+	 
+	 for(int i=0;i<m;i++){
+	    ArrayList<Integer> al = findDivisors(torn[i]);
+	    
+	    for(Integer mm: al) {
+	    	if(hm.containsKey(mm)) {
+	    		ans -= hm.get(mm);
+	    	}
+	    }
+	    
+	 }
+	  
+	     System.out.println("Case #"+ttt+": "+ans);
+	     
+	  }
+	  
+	 
+}
+}
